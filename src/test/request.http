@@ -1,0 +1,53 @@
+###
+DELETE http://localhost:8081/api/posts/1
+
+###
+POST http://localhost:8081/api/posts
+Content-Type: application/json
+{
+  "id": 10,
+  "content": "Last Post"
+}
+
+###
+GET http://localhost:8081/api/posts
+
+###
+GET http://localhost:8081/api/posts/1
+
+###
+POST http://localhost:8081/api/posts
+Content-Type: application/json
+{
+  "id": 0,
+  "content": "Last Post"
+}
+###
+
+POST http://localhost:8081/api/posts
+Content-Type: application/json
+{
+  "id": 0,
+  "content": "Last Post add content"
+}
+###
+
+GET http://localhost:8081/api/posts
+
+###
+GET http://localhost:8081/api/posts/1
+
+###
+POST http://localhost:8081/api/posts
+Content-Type: application/json
+{
+  "id": 0,
+  "content": "Last Post"
+}
+
+
+###
+DELETE http://localhost:8081/api/posts/1
+
+###
+GET http://localhost:8081/api/posts
