@@ -1,6 +1,7 @@
 package ru.netology.controller;
 
 import com.google.gson.Gson;
+import org.springframework.web.bind.annotation.*;
 import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 import ru.netology.service.PostService;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
 
+@RestController
+@RequestMapping("/api/posts")
 public class PostController {
 
     public static final String APPLICATION_JSON = "application/json";
@@ -18,7 +21,7 @@ public class PostController {
         this.service = service;
     }
 
-
+    @GetMapping
     public void all(HttpServletResponse response) throws IOException {
         final var data = service.all();
         response.setContentType(APPLICATION_JSON);
@@ -26,15 +29,16 @@ public class PostController {
         response.getWriter().print(gson.toJson(data));
     }
 
-
-    public void getById(long id, HttpServletResponse response) throws IOException {
+    @GetMapping("/{id}")
+    public void getById(@PathVariable long id, HttpServletResponse response) throws IOException {
             final var data = service.getById(id);
             response.setContentType(APPLICATION_JSON);
             final var gson = new Gson();
             response.getWriter().print(gson.toJson(data));
     }
 
-    public void save(Reader body, HttpServletResponse response) throws IOException {
+    @PostMapping
+    public void save(@RequestBody Reader body, HttpServletResponse response) throws IOException {
             response.setContentType(APPLICATION_JSON);
             final var gson = new Gson();
             final var post = gson.fromJson(body, Post.class);
@@ -42,8 +46,8 @@ public class PostController {
             response.getWriter().print(gson.toJson(data));
     }
 
-
-    public void removeById(long id, HttpServletResponse response) throws IOException {
+    @DeleteMapping("/{id}")
+    public void removeById(@PathVariable long id, HttpServletResponse response) throws IOException {
          service.removeById(id);
             response.getWriter().print("Post with id#" + id + " deleted successful");
     }
