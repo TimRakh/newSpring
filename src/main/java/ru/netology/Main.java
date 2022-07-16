@@ -15,10 +15,12 @@ public class Main {
         tomcat.setBaseDir(baseDir.toAbsolutePath().toString());
 
         final var connector = new Connector();
-        connector.setPort(8081);
+        connector.setPort(8080);
         tomcat.setConnector(connector);
+
         tomcat.getHost().setAppBase(".");
-        tomcat.addWebapp("",".");
+        tomcat.addWebapp("", ".");
+
         tomcat.start();
         tomcat.getServer().await();
 
