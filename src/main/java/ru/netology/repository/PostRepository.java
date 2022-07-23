@@ -10,20 +10,17 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 // Stub
 @Repository
 public class PostRepository {
 
-    private Map<Long, Post> postsListMap = new ConcurrentHashMap<>();
-    private AtomicLong postCount = new AtomicLong(0);
-
+    private final Map<Long, Post> postsListMap = new ConcurrentHashMap<>();
+    private final AtomicLong postCount = new AtomicLong(0);
 
     public List<Post> all() {
         // to convert map values to list
-        return postsListMap.values().
-                stream().collect(Collectors.toCollection(ArrayList::new));
+        return new ArrayList<>(postsListMap.values());
     }
 
     public Optional<Post> getById(long id) {
